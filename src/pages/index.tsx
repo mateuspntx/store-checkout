@@ -1,7 +1,16 @@
-const Home: React.FC = () => (
-  <div>
-    <h1>Hello</h1>
-  </div>
-);
+import Topbar from '../components/Topbar';
+import PageContainer from '../components/PageContainer';
+import Header from '../components/Header';
+
+const Home: React.FC = () => {
+  return (
+    <>
+      <Topbar />
+      <PageContainer>
+        <Header />
+      </PageContainer>
+    </>
+  );
+};
 
 export default Home;
