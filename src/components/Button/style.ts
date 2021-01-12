@@ -8,7 +8,7 @@ interface ButtonProps {
 
 const borderOnly = css`
   background-color: none;
-  border: 1px solid #dbdbdb;
+  border: 1px solid ${(props) => props.theme.colors.quaternary};
 `;
 
 const noColor = css`
@@ -16,8 +16,8 @@ const noColor = css`
 `;
 
 const grayColor = css`
-  background: #383838;
-  color: #fff;
+  background: ${(props) => props.theme.colors.secondary};
+  color: ${(props) => props.theme.colors.white};
 `;
 
 const roundedButton = css`

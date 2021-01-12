@@ -4,7 +4,7 @@ const Bar = styled.div`
   position: absolute;
   width: 100vw;
   height: 5px;
-  background: linear-gradient(90deg, #003d4d 0%, #00c996 100%);
+  background: ${(props) => props.theme.colors.gradient.primary};
 `;
 
 const Topbar: React.FC = () => {
