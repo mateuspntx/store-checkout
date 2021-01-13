@@ -1,10 +1,14 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  /* width: 272px; */
+export const StyledImage = styled(Image)`
+  border-radius: 15px;
 `;
 
-export const InlineContainer = styled.div`
+// Blank for a while
+export const Container = styled.div``;
+
+export const FooterWrapper = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
@@ -19,8 +23,9 @@ export const ImageWrapper = styled.div`
 
 export const Category = styled.p`
   font-size: 14px;
-  color: #676767;
+  color: ${(props) => props.theme.colors.tertiary};
   margin-bottom: 10px;
+  font-weight: 400;
 `;
 
 export const Name = styled.h1`
