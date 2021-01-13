@@ -1,16 +1,16 @@
 import Image from 'next/image';
-import styled from 'styled-components';
-import { FavoriteIcon } from '../../utils/Icons';
 
+import { FavoriteIcon, FavoriteFilledIcon } from '../../utils/Icons';
 import Button from '../Button';
 
 import {
   Container,
-  InlineContainer,
+  FooterWrapper,
   Category,
   Name,
   Price,
   ImageWrapper,
+  StyledImage,
 } from './style';
 
 interface ProductCardProps {
@@ -19,33 +19,44 @@ interface ProductCardProps {
   price: number;
   imageSrc: string;
   isFavorite?: boolean;
+  showFavoriteButton?: boolean;
 }
 
-const StyledImage = styled(Image)`
-  border-radius: 15px;
-`;
-
 const ProductCard: React.FC<ProductCardProps> = (props) => {
-  const { category, name, price, imageSrc, isFavorite, children } = props;
+  const {
+    category,
+    name,
+    price,
+    imageSrc,
+    isFavorite,
+    showFavoriteButton,
+  } = props;
 
   return (
     <Container>
       <ImageWrapper>
         <StyledImage
-          quality="85"
-          src="/assets/images/nike-green-large.jpg"
+          quality={85}
+          src={imageSrc}
           layout="fill"
           objectFit="cover"
         />
       </ImageWrapper>
-      <Category>Men's Shoe</Category>
-      <InlineContainer>
-        <Button variant="no-color">
-          <Image src={FavoriteIcon} width="24" height="24" />
-        </Button>
-        <Name>Nike Green XI</Name>
-        <Price>$95</Price>
-      </InlineContainer>
+      <Category>{category}</Category>
+      <FooterWrapper>
+        {showFavoriteButton &&
+          (isFavorite ? (
+            <Button variant="no-color">
+              <Image src={FavoriteFilledIcon} width={24} height={24} />
+            </Button>
+          ) : (
+            <Button variant="no-color">
+              <Image src={FavoriteIcon} width={24} height={24} />
+            </Button>
+          ))}
+        <Name>{name}</Name>
+        <Price>${price}</Price>
+      </FooterWrapper>
     </Container>
   );
 };
