@@ -5,7 +5,7 @@ import Button from '../Button';
 
 import {
   Container,
-  FooterWrapper,
+  FooterContainer,
   Category,
   Name,
   Price,
@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
         />
       </ImageWrapper>
       <Category>{category}</Category>
-      <FooterWrapper>
+      <FooterContainer>
         {showFavoriteButton &&
           (isFavorite ? (
             <Button variant="no-color">
@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
           ))}
         <Name>{name}</Name>
         <Price>${price}</Price>
-      </FooterWrapper>
+      </FooterContainer>
     </Container>
   );
 };

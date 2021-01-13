@@ -8,7 +8,7 @@ export const StyledImage = styled(Image)`
 // Blank for a while
 export const Container = styled.div``;
 
-export const FooterWrapper = styled.div`
+export const FooterContainer = styled.div`
   display: flex;
   flex: 1;
   justify-content: space-between;
