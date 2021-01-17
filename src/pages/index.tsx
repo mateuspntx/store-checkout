@@ -10,6 +10,7 @@ import Row from '../components/Row';
 interface ProductsListData {
   id: string;
   category: string;
+  slug: string;
   name: string;
   price: number;
   image_uri: string;
@@ -29,6 +30,7 @@ const Home: React.FC<HomeProps> = ({ productsListData }) => {
             <ProductCard
               key={product.id}
               category={product.category}
+              slug={product.slug}
               name={product.name}
               price={product.price}
               imageSrc={product.image_uri}
