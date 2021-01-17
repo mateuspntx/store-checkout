@@ -1,7 +1,15 @@
-const getAllProducts = async () => {
-  const products = await fetch('http://localhost:3000/api/products');
+const API_URL = 'http://localhost:3000';
 
-  return products.json();
+const getAllProducts = async () => {
+  const products = await fetch(`${API_URL}/api/products`);
+
+  return await products.json();
 };
 
-export { getAllProducts };
+const getProduct = async (slug: any) => {
+  const product = await fetch(`${API_URL}/api/products/${slug}`);
+
+  return await product.json();
+};
+
+export { getAllProducts, getProduct };
