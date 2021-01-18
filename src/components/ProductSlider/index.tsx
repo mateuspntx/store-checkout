@@ -10,14 +10,16 @@ interface Props {
 const ProductSlider: React.FC<Props> = ({ images, width, height }) => {
   return (
     <Container>
-      <StyledImage
-        quality={85}
-        src={images[0]}
-        objectFit="cover"
-        width={width}
-        height={height}
-        loading="eager"
-      />
+      {images && (
+        <StyledImage
+          quality={85}
+          src={images[0]}
+          objectFit="cover"
+          width={width}
+          height={height}
+          loading="eager"
+        />
+      )}
     </Container>
   );
 };
