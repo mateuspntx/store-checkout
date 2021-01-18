@@ -20,7 +20,7 @@ interface Props {
 const ProductView: React.FC<Props> = ({ product }) => {
   const globalTheme = useTheme();
 
-  const productSizes = product.sizes.map((size) => {
+  const productSizes = product?.sizes.map((size) => {
     return {
       value: size,
       label: size,
@@ -31,22 +31,23 @@ const ProductView: React.FC<Props> = ({ product }) => {
     <Container>
       <ProductHeader>
         <div className="product-slider-wrapper">
-          <ProductSlider images={product.images} width={523} height={463} />
+          <ProductSlider images={product?.images} width={523} height={463} />
         </div>
         <ProductDetails>
           <div className="header">
-            <p className="category">{product.category}</p>
+            <p className="category">{product?.category}</p>
             <div className="name-and-price-wrapper">
-              <h1>{product.name}</h1>
-              <h1 className="price">${product.price}</h1>
+              <h1>{product?.name}</h1>
+              <h1 className="price">${product?.price}</h1>
             </div>
           </div>
           <div className="size-wrapper">
             <h4>Select Size</h4>
             <hr />
             <Select
+              instanceId="product-size"
               className="select-input"
-              defaultValue={productSizes[0]}
+              defaultValue={product && productSizes[0]}
               options={productSizes}
               theme={(theme) => ({
                 ...theme,
@@ -58,10 +59,10 @@ const ProductView: React.FC<Props> = ({ product }) => {
             />
           </div>
           <div className="summary">
-            <p>{product.short_description}</p>
+            <p>{product?.short_description}</p>
           </div>
           <div className="footer">
-            <CartButton variant="gray" rounded>
+            <CartButton variant="gray" rounded className="pointer">
               Add to cart
             </CartButton>
           </div>
