@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
 
   return (
     <Link href={`product/${slug}`}>
-      <Container>
+      <Container className="pointer">
         <ImageWrapper>
           <StyledImage
             quality={85}

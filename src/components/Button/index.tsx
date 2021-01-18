@@ -22,6 +22,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <ButtonContainer
+      className="pointer"
       type={type}
       variant={variant}
       disabled={disabled}

@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 const Header: React.FC = () => {
   return (
     <Container>
-      <LogoContainer>
+      <LogoContainer className="pointer">
         <Link href="/">
           <h1>Storrr</h1>
         </Link>
