@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 import { FavoriteIcon, FavoriteFilledIcon } from '../../utils/Icons';
@@ -15,6 +16,7 @@ import {
 
 interface ProductCardProps {
   category?: string;
+  slug: string;
   name: string;
   price: number;
   imageSrc: string;
@@ -25,6 +27,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = (props) => {
   const {
     category,
+    slug,
     name,
     price,
     imageSrc,
@@ -33,31 +36,34 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
   } = props;
 
   return (
-    <Container>
-      <ImageWrapper>
-        <StyledImage
-          quality={85}
-          src={imageSrc}
-          layout="fill"
-          objectFit="cover"
-        />
-      </ImageWrapper>
-      <Category>{category}</Category>
-      <FooterContainer>
-        {showFavoriteButton &&
-          (isFavorite ? (
-            <Button variant="no-color">
-              <Image src={FavoriteFilledIcon} width={24} height={24} />
-            </Button>
-          ) : (
-            <Button variant="no-color">
-              <Image src={FavoriteIcon} width={24} height={24} />
-            </Button>
-          ))}
-        <Name>{name}</Name>
-        <Price>${price}</Price>
-      </FooterContainer>
-    </Container>
+    <Link href={`product/${slug}`}>
+      <Container>
+        <ImageWrapper>
+          <StyledImage
+            quality={85}
+            src={imageSrc}
+            layout="fill"
+            objectFit="cover"
+            loading="eager"
+          />
+        </ImageWrapper>
+        <Category>{category}</Category>
+        <FooterContainer>
+          {showFavoriteButton &&
+            (isFavorite ? (
+              <Button variant="no-color">
+                <Image src={FavoriteFilledIcon} width={24} height={24} />
+              </Button>
+            ) : (
+              <Button variant="no-color">
+                <Image src={FavoriteIcon} width={24} height={24} />
+              </Button>
+            ))}
+          <Name>{name}</Name>
+          <Price>${price}</Price>
+        </FooterContainer>
+      </Container>
+    </Link>
   );
 };
 
