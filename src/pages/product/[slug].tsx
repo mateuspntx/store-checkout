@@ -7,17 +7,17 @@ import Topbar from '../../components/Topbar';
 import Header from '../../components/Header';
 import ProductView from '../../components/ProductView';
 
-const Product = ({ product }) => {
-  const { isFallback } = useRouter();
+const Product = ({ product, error }) => {
+  const router = useRouter();
 
-  isFallback && <h1>Loading...</h1>;
+  router.isFallback && <h1>Loading...</h1>;
 
   return (
     <>
       <Topbar />
       <PageContainer>
         <Header />
-        <ProductView product={product} />
+        {error ? <h1>Page not found</h1> : <ProductView product={product} />}
       </PageContainer>
     </>
   );
@@ -40,12 +40,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
+  let error = false;
 
   const product = await getProduct(slug);
+
+  if (product.message) {
+    error = true;
+  }
+
+  console.log(error);
 
   return {
     props: {
       product,
+      error,
     },
     revalidate: 10,
   };
