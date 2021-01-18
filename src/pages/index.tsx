@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { getAllProducts } from '../services/api';
 
 import Topbar from '../components/Topbar';
@@ -13,7 +12,7 @@ interface ProductsListData {
   slug: string;
   name: string;
   price: number;
-  image_uri: string;
+  images: Array<string>;
 }
 interface HomeProps {
   productsListData: ProductsListData[];
@@ -33,7 +32,7 @@ const Home: React.FC<HomeProps> = ({ productsListData }) => {
               slug={product.slug}
               name={product.name}
               price={product.price}
-              imageSrc={product.image_uri}
+              imageSrc={product.images[0]}
             />
           ))}
         </Row>
