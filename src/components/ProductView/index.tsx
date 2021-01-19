@@ -2,6 +2,7 @@ import Select from 'react-select';
 import { useTheme } from 'styled-components';
 
 import ProductSlider from '../../components/ProductSlider';
+import formatPrice from '../../utils/formatPrice';
 
 import { Container, ProductHeader, ProductDetails, CartButton } from './style';
 
@@ -38,7 +39,7 @@ const ProductView: React.FC<Props> = ({ product }) => {
             <p className="category">{product?.category}</p>
             <div className="name-and-price-wrapper">
               <h1>{product?.name}</h1>
-              <h1 className="price">${product?.price}</h1>
+              <h1 className="price">{formatPrice(product?.price)}</h1>
             </div>
           </div>
           <div className="size-wrapper">

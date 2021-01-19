@@ -13,6 +13,7 @@ import {
   ImageWrapper,
   StyledImage,
 } from './style';
+import { formatPrice } from '../../utils/formatPrice';
 
 interface ProductCardProps {
   category?: string;
@@ -42,6 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
           <StyledImage
             quality={85}
             src={imageSrc}
+            // @ts-ignore
             layout="fill"
             objectFit="cover"
             loading="eager"
@@ -60,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
               </Button>
             ))}
           <Name>{name}</Name>
-          <Price>${price}</Price>
+          <Price>{formatPrice(price)}</Price>
         </FooterContainer>
       </Container>
     </Link>
