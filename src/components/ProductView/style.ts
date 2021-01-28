@@ -3,13 +3,14 @@ import Button from '../../components/Button';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 export const ProductHeader = styled.section`
   display: flex;
-  width: 100vw;
+  width: 100%;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 30px;
 
   .product-slider-wrapper {
@@ -66,4 +67,19 @@ export const ProductDetails = styled.section`
 export const CartButton = styled(Button)`
   padding: 14px 40px;
   font-size: 18px;
+`;
+
+export const ProductDescription = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 6.5rem;
+
+  .header > h1 {
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .text-body {
+    margin-top: 2rem;
+  }
 `;

@@ -4,7 +4,13 @@ import { useTheme } from 'styled-components';
 import ProductSlider from '../../components/ProductSlider';
 import formatPrice from '../../utils/formatPrice';
 
-import { Container, ProductHeader, ProductDetails, CartButton } from './style';
+import {
+  Container,
+  ProductHeader,
+  ProductDetails,
+  CartButton,
+  ProductDescription,
+} from './style';
 
 interface Props {
   product: {
@@ -15,6 +21,7 @@ interface Props {
     price: number;
     sizes: Array<number>;
     short_description: string;
+    long_description: string;
   };
 }
 
@@ -69,6 +76,14 @@ const ProductView: React.FC<Props> = ({ product }) => {
           </div>
         </ProductDetails>
       </ProductHeader>
+      <ProductDescription>
+        <div className="header">
+          <h1>Product Details</h1>
+        </div>
+        <div className="text-body">
+          <p>{product?.long_description}</p>
+        </div>
+      </ProductDescription>
     </Container>
   );
 };

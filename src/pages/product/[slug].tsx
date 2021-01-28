@@ -17,7 +17,11 @@ const Product = ({ product, error }) => {
       <Topbar />
       <PageContainer>
         <Header />
-        {error ? <h1>Page not found</h1> : <ProductView product={product} />}
+        {error ? (
+          <h1>Product not found...</h1>
+        ) : (
+          <ProductView product={product} />
+        )}
       </PageContainer>
     </>
   );
@@ -30,8 +34,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { slug: product.slug } };
   });
 
-  console.log(paths);
-
   return {
     paths,
     fallback: true,
@@ -40,6 +42,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
+
   let error = false;
 
   const product = await getProduct(slug);
@@ -47,8 +50,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (product.message) {
     error = true;
   }
-
-  console.log(error);
 
   return {
     props: {
