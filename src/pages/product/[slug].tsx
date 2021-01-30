@@ -1,13 +1,30 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import { getAllProducts } from '../services/api';
 
-const Product = (product: any) => {
-  const { isFallback } = useRouter();
+import { getAllProducts, getProduct } from '../../services/api';
+import PageContainer from '../../components/PageContainer';
+import Topbar from '../../components/Topbar';
+import Header from '../../components/Header';
+import ProductView from '../../components/ProductView';
 
-  isFallback && <h1>Loading...</h1>;
+const Product = ({ product, error }) => {
+  const router = useRouter();
 
-  return <div>{product}</div>;
+  router.isFallback && <h1>Loading...</h1>;
+
+  return (
+    <>
+      <Topbar />
+      <PageContainer>
+        <Header />
+        {error ? (
+          <h1>Product not found...</h1>
+        ) : (
+          <ProductView product={product} />
+        )}
+      </PageContainer>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -25,13 +42,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
-  const products = await getAllProducts();
 
-  const product = products.map((product) => product.slug);
+  let error = false;
+
+  const product = await getProduct(slug);
+
+  if (product.message) {
+    error = true;
+  }
 
   return {
     props: {
       product,
+      error,
     },
     revalidate: 10,
   };
