@@ -2,7 +2,6 @@ import { ButtonHTMLAttributes } from 'react';
 import { ButtonContainer } from './style';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href?: string;
   className?: string;
   type?: 'submit' | 'reset' | 'button';
   disabled?: boolean;

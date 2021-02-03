@@ -5,7 +5,7 @@ import { Container, LogoContainer, ActionsContainer } from './style';
 
 import Button from '../../components/Button';
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <Container>
       <LogoContainer className="pointer">
@@ -15,13 +15,15 @@ const Header: React.FC = () => {
       </LogoContainer>
       <ActionsContainer>
         <Button variant="no-color">
-          <Image
-            src={FavoriteIcon}
-            alt="Favorites"
-            width="32"
-            height="32"
-            priority
-          />
+          <Link href="/favorites">
+            <Image
+              src={FavoriteIcon}
+              alt="Favorites"
+              width="32"
+              height="32"
+              priority
+            />
+          </Link>
         </Button>
         <Button variant="no-color">
           <Image

@@ -17,9 +17,9 @@ import { formatPrice } from '../../utils/formatPrice';
 
 interface ProductCardProps {
   category?: string;
-  slug: string;
+  slug?: string;
   name: string;
-  price: number;
+  price?: number;
   imageSrc: string;
   isFavorite?: boolean;
   showFavoriteButton?: boolean;
@@ -37,7 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
   } = props;
 
   return (
-    <Link href={`product/${slug}`}>
+    <Link href={slug && `product/${slug}`}>
       <Container className="pointer">
         <ImageWrapper>
           <StyledImage
@@ -62,7 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
               </Button>
             ))}
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price>{price && formatPrice(price)}</Price>
         </FooterContainer>
       </Container>
     </Link>

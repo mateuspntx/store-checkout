@@ -59,6 +59,13 @@ export const ProductDetails = styled.section`
     }
   }
 
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-items: center;
+  }
+
   @media (max-width: 615px) {
     gap: 30px 0px;
   }
@@ -67,6 +74,10 @@ export const ProductDetails = styled.section`
 export const CartButton = styled(Button)`
   padding: 14px 40px;
   font-size: 18px;
+`;
+
+export const FavoriteButton = styled(Button)`
+  padding: 14px 40px;
 `;
 
 export const ProductDescription = styled.section`
