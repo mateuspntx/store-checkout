@@ -1,20 +1,34 @@
 import Select from 'react-select';
+import Image from 'next/image';
+
+import { StoreState } from '../../store/createStore';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useTheme } from 'styled-components';
+
+import {
+  addFavoriteProduct,
+  deleteFavoriteProduct,
+} from '../../store/modules/user/actions';
 
 import ProductSlider from '../../components/ProductSlider';
 import formatPrice from '../../utils/formatPrice';
+
+import { FavoriteIcon, FavoriteFilledIcon } from '../../utils/Icons';
 
 import {
   Container,
   ProductHeader,
   ProductDetails,
   CartButton,
+  FavoriteButton,
   ProductDescription,
 } from './style';
 
 interface Props {
   product: {
     id: string;
+    slug: string;
     images: Array<string>;
     category: string;
     name: string;
@@ -27,6 +41,14 @@ interface Props {
 
 const ProductView: React.FC<Props> = ({ product }) => {
   const globalTheme = useTheme();
+
+  const dispatch = useDispatch();
+
+  const { favoriteProducts } = useSelector((state: StoreState) => state.user);
+
+  const isFavorite = favoriteProducts.find(
+    (favorite) => product.id === favorite.id
+  );
 
   const productSizes = product?.sizes.map((size) => {
     return {
@@ -73,6 +95,36 @@ const ProductView: React.FC<Props> = ({ product }) => {
             <CartButton variant="gray" rounded className="pointer">
               Add to cart
             </CartButton>
+            {isFavorite ? (
+              <FavoriteButton
+                variant="no-color"
+                onClick={() =>
+                  dispatch(
+                    deleteFavoriteProduct({
+                      id: product.id,
+                    })
+                  )
+                }
+              >
+                <Image src={FavoriteFilledIcon} width={24} height={24} />
+              </FavoriteButton>
+            ) : (
+              <FavoriteButton
+                variant="no-color"
+                onClick={() =>
+                  dispatch(
+                    addFavoriteProduct({
+                      id: product.id,
+                      name: product.name,
+                      slug: product.slug,
+                      images: product.images,
+                    })
+                  )
+                }
+              >
+                <Image src={FavoriteIcon} width={24} height={24} />
+              </FavoriteButton>
+            )}
           </div>
         </ProductDetails>
       </ProductHeader>
