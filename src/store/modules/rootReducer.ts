@@ -5,4 +5,5 @@ import { StoreState } from '../createStore';
 
 export default combineReducers<StoreState>({
   user,
+  _persist: (state: any = null) => state,
 });

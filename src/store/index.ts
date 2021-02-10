@@ -1,12 +1,17 @@
-import { Middleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { Middleware, Store } from 'redux';
+import createSagaMiddleware, { Task } from 'redux-saga';
 import { persistReducer } from 'redux-persist';
 import { persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { createWrapper } from 'next-redux-wrapper';
 
 import createStore from './createStore';
 import rootReducer from './modules/rootReducer';
 import rootSaga from './modules/rootSaga';
+
+export interface SagaStore extends Store {
+  sagaTask?: Task;
+}
 
 const persistConfig = {
   key: 'storrr',
@@ -14,17 +19,29 @@ const persistConfig = {
   whitelist: ['user'],
 };
 
-const sagaMiddleware = createSagaMiddleware();
+const makeStore = () => {
+  const isServer = typeof window === 'undefined';
 
-const middlewares: Middleware[] = [sagaMiddleware];
+  const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-  persistReducer(persistConfig, rootReducer),
-  middlewares
-);
+  const middlewares: Middleware[] = [sagaMiddleware];
 
-const persistor = persistStore(store);
+  if (isServer) {
+    const makeConfiguredStore = () => createStore(rootReducer, middlewares);
 
-sagaMiddleware.run(rootSaga);
+    return makeConfiguredStore();
+  } else {
+    const store: any = createStore(
+      persistReducer(persistConfig, rootReducer),
+      middlewares
+    );
 
-export { store, persistor };
+    store._persist = persistStore(store);
+
+    (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
+
+    return store;
+  }
+};
+
+export const wrapper = createWrapper(makeStore);
