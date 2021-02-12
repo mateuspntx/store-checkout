@@ -11,14 +11,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const store: any = useStore();
 
   return (
-    // <Provider store={store}>
     <PersistGate persistor={store._persist}>
       <ThemeProvider theme={theme}>
         <Component {...pageProps} />
         <GlobalStyle />
       </ThemeProvider>
     </PersistGate>
-    // </Provider>
   );
 };
 
