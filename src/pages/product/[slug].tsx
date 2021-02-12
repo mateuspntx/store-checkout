@@ -30,9 +30,15 @@ const Product = ({ product, error }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const products = await getAllProducts();
 
-  const paths = products.map((product: any) => {
-    return { params: { slug: product.slug } };
-  });
+  let paths = [];
+
+  try {
+    paths = products.map((product: any) => {
+      return { params: { slug: product.slug } };
+    });
+  } catch (err) {
+    console.log('cant get products slugs (paths)');
+  }
 
   return {
     paths,
