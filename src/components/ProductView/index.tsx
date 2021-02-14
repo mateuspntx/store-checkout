@@ -24,19 +24,21 @@ import {
   FavoriteButton,
   ProductDescription,
 } from './style';
+import Product from '../../pages/product/[slug]';
 
+type Product = {
+  id: string;
+  slug: string;
+  images: Array<string>;
+  category: string;
+  name: string;
+  price: number;
+  sizes: Array<number>;
+  short_description: string;
+  long_description: string;
+};
 interface Props {
-  product: {
-    id: string;
-    slug: string;
-    images: Array<string>;
-    category: string;
-    name: string;
-    price: number;
-    sizes: Array<number>;
-    short_description: string;
-    long_description: string;
-  };
+  product: Product;
 }
 
 const ProductView: React.FC<Props> = ({ product }) => {
