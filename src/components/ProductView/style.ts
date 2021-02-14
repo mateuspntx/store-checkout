@@ -14,6 +14,8 @@ export const ProductHeader = styled.section`
   gap: 30px;
 
   .product-slider-wrapper {
+    display: flex;
+    width: 100vw;
     max-width: 523px;
   }
 `;
